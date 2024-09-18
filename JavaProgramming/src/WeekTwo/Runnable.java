@@ -1,18 +1,24 @@
+package WeekTwo;
+
 public class Runnable {
     public static void main(String[] args) {
         // Create an instance of Person
-        Person person1 = new Person();
-        Person person2 = new Person();
-        Person person3 = new Person();
+        Person sohaib = new Person();
 
-        // Set user information
-        person1.setName("Sohaib");
-        person1.setAge(21);
-        person1.setHeight(6);
+        // Set the information of sohaib (name, age, height)
+        sohaib.setName("Sohaib Mohiuddin");
+        sohaib.setAge(45);
+        sohaib.setHeight(6);
+        sohaib.setNationality("Indian");
 
-        // Get user information
-        System.out.println("The name of the Person: " + person1.getName());
-        System.out.println("The age of the Person: " + person1.getAge());
-        System.out.println("The height of the Person: " + person1.getHeight());
+        // Get the information of sohaib
+        System.out.println("The name is: " + sohaib.getName());
+        System.out.println("The age is: " + sohaib.getAge() + " years old");
+        System.out.println(sohaib.getName() + "'s height is: " + sohaib.getHeight() + "'");
+        System.out.println("The nationality is: " + sohaib.getNationality());
+
+        // Creating a new person
+        Person randomPerson = new Person("Timbaktu");
+        System.out.println(randomPerson.getName() + "'s age is: " + randomPerson.getAge());
     }
 }

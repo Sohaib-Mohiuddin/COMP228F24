@@ -1,19 +1,24 @@
+package WeekTwo;
+
 public class Person {
     // Declaring Instance Variables
     private String name;
     private int age;
     private int height;
+    private String nationality;
 
     // Constructor
     public Person() {
         this.name = "default";
         this.age = 0;
         this.height = 0;
+        this.nationality = "default";
     }
     public Person(String name) {
-        this.age = age;
-        this.name = "default";
+        this.name = name;
+        this.age = 0;
         this.height = 0;
+        this.nationality = "default";
     }
 
     // Setters or Mutators
@@ -26,6 +31,9 @@ public class Person {
     public void setHeight(int height) {
         this.height = height;
     }
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
     // Getters or Accessors
     public String getName() {
@@ -36,5 +44,8 @@ public class Person {
     }
     public int getHeight() {
         return height;
+    }
+    public String getNationality() {
+        return nationality;
     }
 }
