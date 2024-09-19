@@ -11,6 +11,8 @@ public class Runnable {
         sohaib.setHeight(6);
         sohaib.setNationality("Indian");
 
+        System.out.println(Person.stats(sohaib));
+
         // Get the information of sohaib
         System.out.println("The name is: " + sohaib.getName());
         System.out.println("The age is: " + sohaib.getAge() + " years old");

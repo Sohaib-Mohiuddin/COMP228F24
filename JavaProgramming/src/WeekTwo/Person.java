@@ -48,4 +48,8 @@ public class Person {
     public String getNationality() {
         return nationality;
     }
+
+    public static String stats(Person person) {
+        return person.getName();
+    }
 }
