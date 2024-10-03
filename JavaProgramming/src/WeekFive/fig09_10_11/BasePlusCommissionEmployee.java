@@ -1,4 +1,4 @@
-package fig09_10_11;
+package WeekFive.fig09_10_11;
 
 // Fig. 9.11: BasePlusCommissionEmployee.java
 // BasePlusCommissionEmployee class inherits from CommissionEmployee 
