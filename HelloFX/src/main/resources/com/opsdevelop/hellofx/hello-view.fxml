@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 
 <GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.opsdevelop.hellofx.HelloController" hgap="10" vgap="10"
+          fx:controller="com.opsdevelop.hellofx.HelloController" hgap="30" vgap="30"
           alignment="CENTER" style="-fx-padding: 20;">
 
     <!-- Set Column Constraints -->

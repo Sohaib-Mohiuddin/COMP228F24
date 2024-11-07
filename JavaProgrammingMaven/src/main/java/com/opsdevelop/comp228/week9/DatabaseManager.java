@@ -38,7 +38,7 @@ public class DatabaseManager {
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                System.out.printf("ID: %d, First Name: %s, Last Name: %s, Age: %d, Favorite Color: %s, College Program: %s%n",
+                System.out.printf("ID: %d,\n First Name: %s,\n Last Name: %s, Age: %d, Favorite Color: %s, College Program: %s%n",
                         rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"),
                         rs.getInt("age"), rs.getString("favorite_color"), rs.getString("college_program"));
             }
