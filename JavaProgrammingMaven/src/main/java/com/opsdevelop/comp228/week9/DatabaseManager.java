@@ -1,7 +1,13 @@
 package com.opsdevelop.comp228.week9;
 
-import java.sql.*;
 import io.github.cdimascio.dotenv.Dotenv;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 public class DatabaseManager {
     private static final Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
@@ -38,9 +44,7 @@ public class DatabaseManager {
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                System.out.printf("ID: %d,\n First Name: %s,\n Last Name: %s, Age: %d, Favorite Color: %s, College Program: %s%n",
-                        rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"),
-                        rs.getInt("age"), rs.getString("favorite_color"), rs.getString("college_program"));
+                System.out.printf("ID: %d,\nFirst Name: %s,\nLast Name: %s,\nAge: %d,\nFavorite Color: %s,\nCollege Program: %s%n", rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("age"), rs.getString("favorite_color"), rs.getString("college_program"));
             }
         } catch (SQLException e) {
             System.out.println("Error reading data: " + e.getMessage());

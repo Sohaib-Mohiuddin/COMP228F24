@@ -1,11 +1,18 @@
 package com.opsdevelop.comp228;
 
+import com.opsdevelop.comp228.week11.Task1;
+import com.opsdevelop.comp228.week11.Task2;
 import com.opsdevelop.comp228.week9.DatabaseManager;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // week10();
+        week11();
+    }
+
+    public static void week10() {
         DatabaseManager dbManager = new DatabaseManager();
         Scanner scanner = new Scanner(System.in);
 
@@ -60,5 +67,25 @@ public class Main {
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+    public static void week11() {
+        System.out.println("Multithreading Example Started!");
+
+        // Create and start threads
+        Thread thread1 = new Thread(new Task1());
+        Thread thread2 = new Thread(new Task2());
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join(); // Wait for thread1 to complete
+            thread2.join(); // Wait for thread2 to complete
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Multithreading Example Completed!");
     }
 }
