@@ -1,0 +1,14 @@
+services:
+  oracle-db:
+    image: container-registry.oracle.com/database/express:latest
+    container_name: oracle-db
+    environment:
+      - ORACLE_PWD=admin # Set the SYS and SYSTEM passwords
+    ports:
+      - "1521:1521"                   # Oracle database listener port
+      - "5500:5500"                   # Optional: Enterprise Manager Express HTTP port
+    volumes:
+      - oracle-data:/opt/oracle/oradata  # Persistent storage for data files
+
+volumes:
+  oracle-data:
