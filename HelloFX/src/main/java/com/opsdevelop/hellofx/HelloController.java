@@ -1,75 +1,94 @@
 package com.opsdevelop.hellofx;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HelloController {
+    @FXML
+    private TextField firstNameField, lastNameField, ageField, colorField, programField;
 
     @FXML
-    private TextField firstNameField;
+    private TableView<StudentRecord> recordTable;
 
     @FXML
-    private TextField lastNameField;
+    private TableColumn<StudentRecord, String> firstNameColumn, lastNameColumn, favoriteColorColumn, collegeProgramColumn;
 
     @FXML
-    private TextField ageField;
+    private TableColumn<StudentRecord, Integer> ageColumn;
 
     @FXML
-    private TextField programField;
+    private Button submitButton, viewButton;
+
+    private final PostgreSQLManager dbManager;
+    private final ObservableList<StudentRecord> records;
+
+    private static final Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String USER = dotenv.get("DB_USER");
+    private static final String PASS = dotenv.get("DB_PASS");
+
+    public HelloController() {
+        dbManager = new PostgreSQLManager(URL, USER, PASS);
+        records = FXCollections.observableArrayList();
+    }
 
     @FXML
-    private ComboBox<String> colorComboBox;
+    public void initialize() {
+        // Set up the table columns
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        favoriteColorColumn.setCellValueFactory(new PropertyValueFactory<>("favoriteColor"));
+        collegeProgramColumn.setCellValueFactory(new PropertyValueFactory<>("collegeProgram"));
 
-    @FXML
-    private Label messageLabel;
+        // Link the data to the table
+        recordTable.setItems(records);
 
-    @FXML
-    private void onSubmitButtonClick() {
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
-        String ageText = ageField.getText();
-        String program = programField.getText();
-        String favoriteColor = colorComboBox.getValue();
+        // Load table with existing records
+        handleView();
 
-        // Validate input
-        if (firstName.isBlank() || lastName.isBlank() || ageText.isBlank() || program.isBlank() || favoriteColor == null) {
-            showAlert("Input Error", "Please fill in all fields.");
-            return;
-        }
+        submitButton.setOnAction(event -> handleSubmit());
+        viewButton.setOnAction(event -> handleView());
+    }
 
+    private void handleSubmit() {
         try {
-            int age = Integer.parseInt(ageText);
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            int age = Integer.parseInt(ageField.getText());
+            String color = colorField.getText();
+            String program = programField.getText();
 
-            // Display custom message with the collected information
-            messageLabel.setText(String.format("Hello %s %s!\nYour Age is %d\nYour favorite color is %s and you're enrolled in the %s program.",
-                    firstName, lastName, age, favoriteColor, program));
-
-            // Clear input fields
-            firstNameField.clear();
-            lastNameField.clear();
-            ageField.clear();
-            programField.clear();
-            colorComboBox.setValue(null);
+            dbManager.addRecord(firstName, lastName, age, color, program);
+            clearFields();
+            showAlert("Success", "Record added successfully.", Alert.AlertType.CONFIRMATION);
         } catch (NumberFormatException e) {
-            showAlert("Input Error", "Age must be a valid number.");
+            showAlert("Invalid Input", "Fill All Fields Correctly.", Alert.AlertType.ERROR);
         }
     }
 
-    // Utility method to show alert dialog
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void handleView() {
+        records.clear();
+        records.addAll(dbManager.getAllRecords());
+    }
+
+    private void clearFields() {
+        firstNameField.clear();
+        lastNameField.clear();
+        ageField.clear();
+        colorField.clear();
+        programField.clear();
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void initialize() {
-        // Initialize the color ComboBox with some example color choices
-        colorComboBox.setItems(FXCollections.observableArrayList("Red", "Blue", "Green", "Yellow", "Purple"));
     }
 }

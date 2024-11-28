@@ -10,6 +10,8 @@ module com.opsdevelop.hellofx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+    requires java.dotenv;
 
     opens com.opsdevelop.hellofx to javafx.fxml;
     exports com.opsdevelop.hellofx;
