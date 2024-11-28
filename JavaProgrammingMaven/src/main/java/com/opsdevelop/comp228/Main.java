@@ -3,13 +3,15 @@ package com.opsdevelop.comp228;
 import com.opsdevelop.comp228.week11.Task1;
 import com.opsdevelop.comp228.week11.Task2;
 import com.opsdevelop.comp228.week9.DatabaseManager;
+import com.opsdevelop.comp228.week12.*;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // week10();
-        week11();
+        // week11();
+        week12();
     }
 
     public static void week10() {
@@ -87,5 +89,23 @@ public class Main {
         }
 
         System.out.println("Multithreading Example Completed!");
+    }
+
+    public static void week12() {
+        ArrayListDemo ald = new ArrayListDemo();
+        ListDemo ld = new ListDemo();
+        StackDemo sd = new StackDemo();
+        QueueDemo qd = new QueueDemo();
+        PriorityQueueDemo pqd = new PriorityQueueDemo();
+        HashMapDemo hmd = new HashMapDemo();
+        HashTableDemo htd = new HashTableDemo();
+
+        // ald.demonstrateArrayList();
+        // ld.demonstrateList();
+        // sd.demonstrateStack();
+        // qd.demonstrateQueue();
+        // pqd.demonstratePriorityQueue();
+        // hmd.demonstrateHashMap();
+        // htd.demonstrateHashTable();
     }
 }
