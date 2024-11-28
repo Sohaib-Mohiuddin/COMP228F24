@@ -6,7 +6,7 @@ public class Task2 implements Runnable {
         for (char c = 'A'; c <= 'E'; c++) {
             System.out.println("Task2 - Character: " + c);
             try {
-                Thread.sleep(700); // Simulate a delay
+                Thread.sleep(500); // Simulate a delay
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
